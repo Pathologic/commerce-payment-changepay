@@ -33,7 +33,7 @@ class ChangePay extends Payment
             'chat_id' => '',
             'shop_id' => $this->getSetting('shop_id'),
             'api_key' => $this->getSetting('api_key'),
-            'redirect_url' => MODX_SITE_URL . 'commerce/changepay/payment-success',
+            'redirect_url' => MODX_SITE_URL,
         ];
         try {
             $response = $this->request($data);
