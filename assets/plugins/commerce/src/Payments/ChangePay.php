@@ -32,7 +32,7 @@ class ChangePay extends Payment
             'order_id' => $order['id'] . '-' . $payment['id'],
             'shop_id' => $this->getSetting('shop_id'),
             'api_key' => $this->getSetting('api_key'),
-            'redirect_url' => MODX_SITE_URL . 'commerce/usegateway/payment-success',
+            'redirect_url' => MODX_SITE_URL . 'commerce/changepay/payment-success',
         ];
         try {
             $response = $this->request($data);
