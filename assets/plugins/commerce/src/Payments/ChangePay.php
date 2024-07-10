@@ -30,6 +30,7 @@ class ChangePay extends Payment
             'amount' => $payment['amount'],
             'currency' => $order['currency'],
             'order_id' => $order['id'] . '-' . $payment['id'],
+            'chat_id' => '',
             'shop_id' => $this->getSetting('shop_id'),
             'api_key' => $this->getSetting('api_key'),
             'redirect_url' => MODX_SITE_URL . 'commerce/changepay/payment-success',
@@ -37,7 +38,7 @@ class ChangePay extends Payment
         try {
             $response = $this->request($data);
 
-            return $response['url'];
+			return $response['url'];
         } catch (\Exception $e) {
             if ($this->debug) {
                 $this->modx->logEvent(0, 3,
@@ -111,8 +112,9 @@ class ChangePay extends Payment
         $httpcode = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
         curl_close($curl);
         $response = json_decode($response, true) ?? [];
+
         if ($httpcode !== 200 || empty($response) || (isset($response['error']))) {
-            throw new \Exception('Request failed with ' . $httpcode . ': <pre>' . print_r($data, true) . '</pre>', $httpcode);
+            throw new \Exception('Request failed with ' . $httpcode . ': <pre>' . print_r($response, true) . '</pre>', $httpcode);
         }
 
         return $response;
