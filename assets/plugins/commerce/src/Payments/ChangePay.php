@@ -38,7 +38,7 @@ class ChangePay extends Payment
         try {
             $response = $this->request($data);
 
-			return $response['url'];
+            return $response['url'];
         } catch (\Exception $e) {
             if ($this->debug) {
                 $this->modx->logEvent(0, 3,
